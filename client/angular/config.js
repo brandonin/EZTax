@@ -5,7 +5,10 @@ app.config(function ($routeProvider) {
     .when('/',{
         templateUrl: 'partials/home.html'
     })   
-    .otherwise({
-      redirectTo: '/'
-    });
+    .when('/dashboard',{
+        templateUrl: 'partials/dashboard.html'
+    })
+   .when('/tax_return',{
+        templateUrl: 'partials/tax_return/start.html'
+    })   
 });
