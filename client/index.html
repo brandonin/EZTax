@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+
+<title>PHPRO</title>
+<!-- load bootstrap and friends -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
+<!-- load angularjs and the seperate route module -->
+    <script text="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+    <script src="./angular/config.js"></script>
+    <script src="./angular/factories.js"></script>
+    <script src="./angular/controllers.js"></script>
+<!-- load up our app -->
+</head>
+
+<body>
+
+<!-- Static navbar -->
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container">
+<div class="navbar-header">
+<a class="navbar-brand" href="#">PHPRO.ORG</a>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="active"><a href="#">Home</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="http://phpro.org/tutorials">Tutorials</a></li>
+<li><a href="http://phpro.org/articles">Articles</a></li>
+<li><a href="http://phpro.org/examples">Examples</a></li>
+</ul>
+</div><!--/.nav-collapse -->
+</div>
+</div>
+
+
+<div class="container">
+
+<!-- content is injected here -->
+<div ng-view></div>
+
+</div> <!-- /container -->
+
+</body>
+</html>
