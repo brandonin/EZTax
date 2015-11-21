@@ -16,7 +16,7 @@ body {
 
 hr {
     max-width: 50px;
-    border-color: #f05f40;
+    border-color: #50C9C3;
     border-width: 3px;
 }
 
@@ -52,7 +52,9 @@ p {
 }
 
 .bg-primary {
-    background-color: #f05f40;
+  background: #50C9C3 ; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #50C9C3  , #96DEDA ); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #50C9C3  , #96DEDA ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .bg-dark {
@@ -178,7 +180,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: url(./../img/header.jpg);
+    background-image: url(./../img/TAX.GIF);
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -388,7 +390,7 @@ fieldset[disabled] .btn-default.active {
 .btn-primary {
     border-color: #f05f40;
     color: #fff;
-    background-color: #f05f40;
+    background-color: #50C9C3;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -402,7 +404,7 @@ fieldset[disabled] .btn-default.active {
 .open > .dropdown-toggle.btn-primary {
     border-color: #ed431f;
     color: #fff;
-    background-color: #ee4b28;
+    background-color: #50C9C3;
 }
 
 .btn-primary:active,
