@@ -95,6 +95,7 @@ figure {
 }
 hr {
   height: 0;
+
   -webkit-box-sizing: content-box;
      -moz-box-sizing: content-box;
           box-sizing: content-box;
@@ -3064,7 +3065,7 @@ fieldset[disabled] .btn-default.active {
   background-color: #333;
 }
 .btn-primary {
-  color: #fff;
+  color: #1d95d1;
   background-color: #337ab7;
   border-color: #2e6da4;
 }
