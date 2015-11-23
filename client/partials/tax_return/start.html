@@ -98,6 +98,36 @@
 				    </div>
 				  </div>
 			</div>
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Medical and Dental expenses paid</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.medicalExpenses" ng-change="medicalExpenses(tax.medicalExpenses)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Amount of State Taxes Paid</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.stateTaxes" ng-change="stateTaxes(tax.stateTaxes)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Amount of Mortgage Interest Paid</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.mortgageInterest" ng-change="mortgageInterest(tax.mortgageInterest)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
 		</div>
 	</div>
 	<div class="tax_wrapper">
@@ -137,11 +167,11 @@
 			</div>
 			<hr ng-show="numberOfDependents" class="full">
 
-			<div class="row default-text">
+			<div class="row default-text" ng-show="adjustments">
 				<h4 class="padding-left col-sm-6">Adjustments</h4>
-				<h4 class="spacing col-sm-6">$0.00</h4>
+				<h4 class="spacing col-sm-6">${{ adjustments }}</h4>
 			</div>
-			<hr class="full">
+			<hr class="full" ng-show="adjustments">
 			<div class="row default-text" ng-show="deduction">
 				<h4 class="padding-left col-sm-6">Deductions</h4>
 				<h4 class="spacing col-sm-6">${{ deduction }}</h4>
