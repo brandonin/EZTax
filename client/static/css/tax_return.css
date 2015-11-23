@@ -1,3 +1,78 @@
+.tax_return{
+	padding-right: 15px;
+	padding-left: 15px;
+	display: inline-block;
+	margin-left: 10%;
+	vertical-align: top;
+}
+@media (min-width: 420px) {
+  .tax_return {
+    width: 400px;
+  }
+}
+@media (min-width: 720px) {
+  .tax_return {
+    width: 700px;
+  }
+}
+.tax_return-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
 .taxes {
-	
+	/*height: 100px;*/
+	/*display: inline-block;*/
+	/*position: fixed;*/
+	background-color: rgba(80,201,195, 0.2); /* fallback for old browsers */
+	background-color: -webkit-linear-gradient(to left, #50C9C3 , #96DEDA); /* Chrome 10-25, Safari 5.1-6 */
+	background-color: linear-gradient(to left, #50C9C3 , #96DEDA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	vertical-align: top;
+	border-radius: 10px;
+}
+.current_tax {
+	display: block;
+	border-radius: 10px;
+	/*font-style: bold;*/
+	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: 700;
+	color:#43505c;
+	padding: 30px 100px 10px 100px;
+
+}
+.forecasted_refund {
+	color: #a1bc17;
+	font-size: 40px;
+	font-weight: 500;
+	text-align: center;
+	padding-bottom: 20px;
+}
+.tax_wrapper {
+	display: inline-block;
+	text-align: vertical;
+}
+.inline{
+	display: inline-block;
+	float: none;
+}
+.full {
+	max-width: 90%;
+}
+.taxes_summary {
+		background-color: rgba(80,201,195, 0.2); /* fallback for old browsers */
+	background-color: -webkit-linear-gradient(to left, #50C9C3 , #96DEDA); /* Chrome 10-25, Safari 5.1-6 */
+	background-color: linear-gradient(to left, #50C9C3 , #96DEDA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	vertical-align: top;
+	border-radius: 10px;
+	padding:20px;
+}
+.padding-left{
+	padding-left: 10%;
+	padding-right: 0%;
+}
+.spacing{
+	text-align: right;
+	padding-right: 10%;
 }

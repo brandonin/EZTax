@@ -1,55 +1,137 @@
-<div class="blue">
-<div class="navbar navbar-default navbar-static-top" role="navigation">
-<div class="navbar-header">
-<a class="navbar-brand" href="#/dashboard">EZTax</a>
-</div>
-<div class="navbar-collapse collapse">
-<ul class="nav navbar-nav">
-<li class="active"><a href="#/dashboard">Home</a></li>
-<li><a href="#/dashboard">FAQ</a></li>
-<li><a href="#/dashboard">Contact</a></li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-<li><a href="#/dashboard">My Account</a></li>
-</ul>
-</div><!--/.nav-collapse -->
-</div>
-</div>
-<div class="container">
-<label>marital status: </label>
-<select>
-	<option>Single</option>
-	<option>Married filing jointly</option>
-	<option>Married filing Separately</option>
-	<option>Head of household</option>
-	<option>Qualifying Widow</option>
-</select><br>
-<label>Do you have Kids?</label>
-	<input type="radio" name="kids" ng-click="button=true" value="no" checked>No
-	<input type="radio" name="kids" ng-click="button=false" value="yes">Yes<br>
-	<input type="text" ng-model="kids" ng-disabled="button" required ng-init="button=true" placeholder="how many?"><br>
+<div ng-controller="TaxController">
+	<div class="blue">
+		<div class="navbar navbar-default navbar-static-top" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#/dashboard">EZTax</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#/dashboard">Home</a></li>
+					<li><a href="#/dashboard">FAQ</a></li>
+					<li><a href="#/dashboard">Contact</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#/dashboard">My Account</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+	<div ng-show="tax"> {{ tax }}
 
+	</div>
+	<div class="tax_return">
+		<div class="personal">
+			<h2>Personal</h2>
+			<hr class="full">
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Are you single or married? </h4>
+			<form class="col-sm-6 text-right" name="test">
+				<button class="btn btn-primary" ng-model="tax.single" name="single" ng-click="single()">
+					Single
+				</button>
+				<button class="btn btn-primary" ng-model="tax.married" ng-click="married()">
+					Married
+				</button>
+			</form>
+		</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">How old are you? </h4>
+				<div>
+					<input type="text" placeholder="age" class="col-sm-3">
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">Are you claimed as a dependent?</h4>
+				<div class="col-sm-6 text-right">
+					<input type="button" class="btn btn-primary" value="yes" ng-click="kids_button=false">
+					<input type="button" class="btn btn-primary" value="no" ng-click="kids_button=true">
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">Do you have Kids?</h4>
+				<div class="col-sm-6 text-right">
+					<input type="button" class="btn btn-primary" name="kids" ng-click="button=false" value="yes" checked>
+					<input type="button" class="btn btn-primary" name="kids" ng-click="button=true" value="no">
+				</div>
+				<input type="text" ng-model="kids" ng-disabled="button" required ng-init="button=false" placeholder="how many?"><br>
+			</div>
+		</div>
+		<div class="income">
+			<h2>Income</h2>
+			<hr class="full">
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Total Income</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Your federal taxes withheld and estimated payments</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+		</div>
 
-<input type="text" placeholder="Total income"><br>
-Do you have any other source of income, or nah? (stock, social security)
-<input type="text" placeholder="alternative income"><br>
-Wht are your expenses?
-<input type="text" placeholder="Expenses"><br>
+		<div class="deduction">
+			<h2>Deductions</h2>
+			<hr class="full">
 
-<h4>Your total Adjusted Gross Income</h4>
-
-Are you born or your spouse born at or before 1951? 
-<form>
-	<input type="radio" name="1951" value="yes" checked>Yes
-	<input type="radio" name="1951" value="no">No
-</form><br>
-Are you or your spouse blind?
-<form>
-	<input type="radio" name="1951" value="yes" checked>Yes
-	<input type="radio" name="1951" value="no">No
-</form>
-
-<div class="taxes">
-
-</div>
+		</div>
+	</div>
+	<div class="tax_wrapper">
+		<div class="taxes">
+			<h4 class="current_tax">
+				Forecasted Refund
+			</h4>
+			<h4 class="forecasted_refund">
+				$0.00
+			</h4>
+		</div>
+		<div class="taxes_summary">
+			<h4>Summary</h4><br>
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Filing Status</h4>
+				<h4 class="spacing col-sm-6">Single</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Total Income</h4>
+				<h4 class="spacing col-sm-6">$0.00</h4>
+			</div>
+			<hr class="full">
+	<!-- 		<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Adjusted Income</h4>
+				<h4 class="spacing col-sm-6">$0.00</h4>
+			</div>
+			<hr class="full"> -->
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Dependents</h4>
+				<h4 class="spacing col-sm-6">0</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Adjustments</h4>
+				<h4 class="spacing col-sm-6">$0.00</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Deductions</h4>
+				<h4 class="spacing col-sm-6" ng-show="tax"> {{ tax }}</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Exemptions</h4>
+				<h4 class="spacing col-sm-6">$4,000</h4>
+			</div>
+		</div>
+	</div>
 </div>
