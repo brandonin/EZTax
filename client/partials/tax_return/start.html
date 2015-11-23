@@ -43,17 +43,21 @@
 			<div class="col-sm-12">
 				<h4 class="col-sm-6">Are you claimed as a dependent?</h4>
 				<div class="col-sm-6 text-right">
-					<button class="btn btn-primary" ng-model="tax.Dependent" ng-click="dependent()">Yes</button>
-					<button type="button" class="btn btn-primary" ng-model="tax.NotDependent" ng-click="notDependent()">No</button>
+					<button class="btn btn-primary" ng-model="tax.dependent" ng-click="isaDependent()">Yes</button>
+					<button class="btn btn-primary" ng-model="tax.notDependent" ng-click="notaDependent()">No</button>
 				</div>
 			</div>
-			<div class="col-sm-12">
-				<h4 class="col-sm-6">Do you have Kids?</h4>
+			<div class="col-sm-12" ng-show="isDependent">
+				<h4 class="col-sm-6">Do you have Dependents?</h4>
 				<div class="col-sm-6 text-right">
-					<button class="btn btn-primary" name="kids" ng-click="kids()">yes</button>
-					<button class="btn btn-primary" name="kids" ng-click="noKids()" value="no">no</button>
+					<button class="btn btn-primary" ng-click="yesKids()">yes</button>
+					<button class="btn btn-primary" ng-click="noKids()">no</button>
 				</div>
-				<input type="text" ng-model="kids" ng-disabled="button" required ng-init="button=false" placeholder="how many?"><br>
+			</div>
+			<div ng-show="kids" class="col-sm-12">
+				<input type="text" class="col-sm-11" ng-model="tax.dependentsUnder17" ng-change="claimedDependents(tax.dependentsUnder17)" placeholder="how many dependents do you have?">
+<!-- 				<input type="text" class="col-sm-11" ng-model="tax.dependentsOver17" ng-change="claimedDependentsOver17(tax.dependentsOver17)" placeholder="how many are dependents 17-23 and a full-time student?"> -->
+<!-- 				<input type="text" class="col-sm-11" ng-model="tax.dependentsUnder17" ng-change="claimedDependents(tax.dependentsUnder17)" placeholder="how many are dependents age 16 or under?"> -->
 			</div>
 		</div>
 		<div class="income">
@@ -64,7 +68,7 @@
 				  <div class="form-inline form-group inline col-sm-6">
 				    <div class="input-group">
 				      <div class="input-group-addon">$</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.totalIncome" ng-change="totalIncome(tax.totalIncome)">
 				      <div class="input-group-addon">.00</div>
 				    </div>
 				  </div>
@@ -74,7 +78,7 @@
 				  <div class="form-inline form-group inline col-sm-6">
 				    <div class="input-group">
 				      <div class="input-group-addon">$</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.federalTaxesWithheld" ng-change="federalTaxesWithheld(tax.federalTaxesWithheld)">
 				      <div class="input-group-addon">.00</div>
 				    </div>
 				  </div>
@@ -84,7 +88,16 @@
 		<div class="deduction">
 			<h2>Deductions</h2>
 			<hr class="full">
-
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Student Loan Interest Paid</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.studentLoanInterest" ng-change="studentLoanInterest(tax.studentLoanInterest)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
 		</div>
 	</div>
 	<div class="tax_wrapper">
@@ -105,19 +118,25 @@
 			<hr class="full">
 			<div class="row default-text">
 				<h4 class="padding-left col-sm-6">Total Income</h4>
-				<h4 class="spacing col-sm-6">$0.00</h4>
+				<h4 class="spacing col-sm-6">${{ incomeTotal }}</h4>
 			</div>
 			<hr class="full">
+			<div class="row default-text" ng-show="taxesWithheld">
+				<h4 class="padding-left col-sm-6">Federal Taxes Withheld</h4>
+				<h4 class="spacing col-sm-6">${{ taxesWithheld }}</h4>
+			</div>
+			<hr ng-show="taxesWithheld" class="full">
 	<!-- 		<div class="row default-text">
 				<h4 class="padding-left col-sm-6">Adjusted Income</h4>
 				<h4 class="spacing col-sm-6">$0.00</h4>
 			</div>
 			<hr class="full"> -->
-			<div class="row default-text">
+			<div class="row default-text" ng-show="numberOfDependents">
 				<h4 class="padding-left col-sm-6">Dependents</h4>
-				<h4 class="spacing col-sm-6">0</h4>
+				<h4 class="spacing col-sm-6">{{ numberOfDependents }}</h4>
 			</div>
-			<hr class="full">
+			<hr ng-show="numberOfDependents" class="full">
+
 			<div class="row default-text">
 				<h4 class="padding-left col-sm-6">Adjustments</h4>
 				<h4 class="spacing col-sm-6">$0.00</h4>
@@ -125,12 +144,12 @@
 			<hr class="full">
 			<div class="row default-text" ng-show="deduction">
 				<h4 class="padding-left col-sm-6">Deductions</h4>
-				<h4 class="spacing col-sm-6"> {{ deduction }}</h4>
+				<h4 class="spacing col-sm-6">${{ deduction }}</h4>
 			</div>
 				<hr ng-show="deduction" class="full">
 			<div class="row default-text" ng-show="exemption">
 				<h4 class="padding-left col-sm-6">Exemptions</h4>
-				<h4 class="spacing col-sm-6">{{ exemption }}</h4>
+				<h4 class="spacing col-sm-6">${{ exemption }}</h4>
 			</div>
 		</div>
 	</div>
