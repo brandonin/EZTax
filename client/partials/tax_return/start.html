@@ -16,7 +16,7 @@
 			</div><!--/.nav-collapse -->
 		</div>
 	</div>
-	<div ng-show="tax"> {{ tax }}
+	<div> {{ age }}
 
 	</div>
 	<div class="tax_return">
@@ -26,10 +26,10 @@
 			<div class="col-sm-12">
 			<h4 class="col-sm-6">Are you single or married? </h4>
 			<form class="col-sm-6 text-right" name="test">
-				<button class="btn btn-primary" ng-model="tax.single" name="single" ng-click="single()">
+				<button class="btn btn-primary" ng-model="tax.deductionMaritalStatusSingle" name="single" ng-click="single()">
 					Single
 				</button>
-				<button class="btn btn-primary" ng-model="tax.married" ng-click="married()">
+				<button class="btn btn-primary" ng-model="tax.deductionMaritalStatusMarried" name="married" ng-click="married()">
 					Married
 				</button>
 			</form>
@@ -37,21 +37,21 @@
 			<div class="col-sm-12">
 				<h4 class="col-sm-6">How old are you? </h4>
 				<div>
-					<input type="text" placeholder="age" class="col-sm-3">
+					<input type="text" placeholder="age" name="age" ng-model="tax.age" ng-change="age(tax.age)" class="col-sm-3">
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<h4 class="col-sm-6">Are you claimed as a dependent?</h4>
 				<div class="col-sm-6 text-right">
-					<input type="button" class="btn btn-primary" value="yes" ng-click="kids_button=false">
-					<input type="button" class="btn btn-primary" value="no" ng-click="kids_button=true">
+					<button class="btn btn-primary" ng-model="tax.Dependent" ng-click="dependent()">Yes</button>
+					<button type="button" class="btn btn-primary" ng-model="tax.NotDependent" ng-click="notDependent()">No</button>
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<h4 class="col-sm-6">Do you have Kids?</h4>
 				<div class="col-sm-6 text-right">
-					<input type="button" class="btn btn-primary" name="kids" ng-click="button=false" value="yes" checked>
-					<input type="button" class="btn btn-primary" name="kids" ng-click="button=true" value="no">
+					<button class="btn btn-primary" name="kids" ng-click="kids()">yes</button>
+					<button class="btn btn-primary" name="kids" ng-click="noKids()" value="no">no</button>
 				</div>
 				<input type="text" ng-model="kids" ng-disabled="button" required ng-init="button=false" placeholder="how many?"><br>
 			</div>
@@ -123,14 +123,14 @@
 				<h4 class="spacing col-sm-6">$0.00</h4>
 			</div>
 			<hr class="full">
-			<div class="row default-text">
+			<div class="row default-text" ng-show="deduction">
 				<h4 class="padding-left col-sm-6">Deductions</h4>
-				<h4 class="spacing col-sm-6" ng-show="tax"> {{ tax }}</h4>
+				<h4 class="spacing col-sm-6"> {{ deduction }}</h4>
 			</div>
-			<hr class="full">
-			<div class="row default-text">
+				<hr ng-show="deduction" class="full">
+			<div class="row default-text" ng-show="exemption">
 				<h4 class="padding-left col-sm-6">Exemptions</h4>
-				<h4 class="spacing col-sm-6">$4,000</h4>
+				<h4 class="spacing col-sm-6">{{ exemption }}</h4>
 			</div>
 		</div>
 	</div>
