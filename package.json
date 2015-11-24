@@ -1,11 +1,15 @@
 {
-  "name": "basic_mongoose_app",
+  "name": "easy_tax",
   "dependencies": {
     "body-parser": "^1.14.1",
     "ejs": "1.0.0",
     "express": "~4.10.0",
     "mongoose": "^4.2.5",
     "socket.io": "^1.3.7"
+  },
+  "repository": {
+  	"type": "git",
+  	"url": "https://github.com/brandonin/EZTax.git"
   }
 }
 
