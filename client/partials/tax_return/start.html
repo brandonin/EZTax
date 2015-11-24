@@ -119,7 +119,7 @@
 				  </div>
 			</div>
 			<div class="col-sm-12">
-			<h4 class="col-sm-6">Amount of Mortgage Interest Paid</h4>
+				<h4 class="col-sm-6">Amount of Mortgage Interest Paid</h4>
 				  <div class="form-inline form-group inline col-sm-6">
 				    <div class="input-group">
 				      <div class="input-group-addon">$</div>
@@ -129,23 +129,56 @@
 				  </div>
 			</div>
 		</div>
+		<div class="credits">
+			<h2>Credits</h2>
+			<hr class="full">
+				<div class="col-sm-12">
+					<h4 class="col-sm-6">Did you have any collge education expenses?</h4>
+					<div class="col-sm-6 text-right">
+						<button class="btn btn-primary" ng-model="tax.yesEducationExpenses" ng-click="paysEducationExpenses()">Yes</button>
+						<button class="btn btn-primary" ng-model="tax.noEducationExpenses" ng-click="noEducationExpenses()">No</button>
+					</div>
+				</div>
+				<div class="col-sm-12" ng-show="education">
+					<h4 class="col-sm-6">how many students are enrolled full-time?</h4>
+					<div class="col-sm-6 text-right">
+						<button class="btn btn-primary" ng-model="tax.student" ng-click="student(1)">1</button>
+						<button class="btn btn-primary" ng-model="tax.student" ng-click="student(2)">2</button>
+						<button class="btn btn-primary" ng-model="tax.student" ng-click="student(3)">3</button>
+					</div>
+				</div>
+				<div class="col-sm-12" ng-show="education">
+					<h4 class="col-sm-6">Qualifying education expenses</h4>
+				    <div class="form-inline form-group inline col-sm-6">
+					    <div class="input-group">
+					      <div class="input-group-addon">$</div>
+						      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.educationExpenses" ng-change="educationExpenses(tax.educationExpenses)">
+					      <div class="input-group-addon">.00</div>
+					    </div>
+					</div>
+				</div>
+		</div>
+	<div class="col-sm-12">
+	<button href="#/results" class="btn btn-primary text-right col-sm-12">Submit</button>
 	</div>
+	</div>
+
 	<div class="tax_wrapper">
-		<div class="taxes">
+<!-- 		<div class="taxes">
 			<h4 class="current_tax">
 				Forecasted Refund
 			</h4>
 			<h4 class="forecasted_refund">
-				$0.00
+				{{ forecastedReturn }}
 			</h4>
-		</div>
+		</div> -->
 		<div class="taxes_summary">
 			<h4>Summary</h4><br>
-			<div class="row default-text">
+			<div class="row default-text" ng-show="maritalStatus">
 				<h4 class="padding-left col-sm-6">Filing Status</h4>
-				<h4 class="spacing col-sm-6">Single</h4>
+				<h4 class="spacing col-sm-6">{{ maritalStatus }}</h4>
 			</div>
-			<hr class="full">
+			<hr class="full" ng-show="maritalStatus">
 			<div class="row default-text">
 				<h4 class="padding-left col-sm-6">Total Income</h4>
 				<h4 class="spacing col-sm-6">${{ incomeTotal }}</h4>
@@ -180,6 +213,16 @@
 			<div class="row default-text" ng-show="exemption">
 				<h4 class="padding-left col-sm-6">Exemptions</h4>
 				<h4 class="spacing col-sm-6">${{ exemption }}</h4>
+			</div>				
+			<hr ng-show="exemption" class="full">
+			<div class="row default-text" ng-show="education_credit">
+				<h4 class="padding-left col-sm-6">Education Credit</h4>
+				<h4 class="spacing col-sm-6">${{ education_credit }}</h4>
+			</div>
+			<hr ng-show="education_credit" class="full">
+			<div class="row default-text" ng-show="AOC">
+				<h4 class="padding-left col-sm-6">American Opportunity Credit</h4>
+				<h4 class="spacing col-sm-6">${{ AOC }}</h4>
 			</div>
 		</div>
 	</div>

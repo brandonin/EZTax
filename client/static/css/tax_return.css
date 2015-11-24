@@ -52,6 +52,8 @@
 .tax_wrapper {
 	display: inline-block;
 	text-align: vertical;
+	position: fixed;
+	overflow: scroll;
 }
 .inline{
 	display: inline-block;
@@ -60,13 +62,18 @@
 .full {
 	max-width: 90%;
 }
+
+
 .taxes_summary {
 	background-color: rgba(80,201,195, 0.2); /* fallback for old browsers */
 	background-color: -webkit-linear-gradient(to left, #50C9C3 , #96DEDA); /* Chrome 10-25, Safari 5.1-6 */
 	background-color: linear-gradient(to left, #50C9C3 , #96DEDA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	vertical-align: top;
 	border-radius: 10px;
-	padding:20px;
+	padding:20px;	
+	overflow: scroll;
+	max-height: 600px;
+	width: 400px;
 }
 .padding-left{
 	padding-left: 10%;
@@ -79,3 +86,6 @@
 .btn-primary:hover{
 	background-color: rgba(80,201,200, 0.6)
 };
+.credits {
+    border-bottom: 1px solid black;
+}

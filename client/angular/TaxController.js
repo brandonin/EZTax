@@ -1,4 +1,5 @@
 app.controller("TaxController", function($scope) {
+	console.log($scope);
 	var deductionMaritalStatus = null;
 	var deductionAge = null;
 	var exemptionDependent = null;
@@ -9,14 +10,24 @@ app.controller("TaxController", function($scope) {
 	var numberOfDependents = 0;
 	var federalTaxesWithheld;
 	var mortgageInterest;
+	var educational_credit;
+	var AOC;
 	if(!$scope.incomeTotal) {
 		$scope.incomeTotal = 0;
 	}
+	// $scope.$watch($scope, function(){
+	// 	alert("test");
+	// });
+	$scope.forecastedReturn = $scope.incomeTotal;
+	
+
 	$scope.single = function() {
+		$scope.maritalStatus = "Single";
 		deductionMaritalStatus = 6300;
 		$scope.deduction = deductionMaritalStatus;
 	};
 	$scope.married = function() {
+		$scope.maritalStatus = "Married";
 		deductionMaritalStatus = 12600;
 		$scope.deduction = deductionMaritalStatus;
 	};
@@ -203,5 +214,43 @@ app.controller("TaxController", function($scope) {
 			console.log(8);
 			$scope.deduction = $scope.deductionAge;
 		}
+	}
+	$scope.paysEducationExpenses = function () {
+		education = true;
+		$scope.education = education;
+	}
+	$scope.noEducationExpenses = function () {
+		education = false;
+		$scope.education = education;
+	}
+	$scope.student = function (data) {
+		var students = parseInt(data);
+		$scope.students = students;
+	}
+	$scope.educationExpenses = function (data) {
+		if($scope.students == 1 && data >= 2500){
+			$scope.education_credit = 1500;
+			$scope.AOC = 1000;
+		} else if($scope.students == 1 && data < 2500){
+			educational_credit = data * .6;
+			$scope.education_credit = educational_credit;
+			$scope.AOC = data - educational_credit;
+		} else if($scope.students == 2 && data >= 5000){
+			$scope.education_credit = 3000;
+			$scope.AOC = 2000;
+		} else if($scope.students == 2 && data < 5000){
+			educational_credit = data * .6;
+			$scope.education_credit = educational_credit;
+			$scope.AOC = data - educational_credit;
+		} else if($scope.students == 3 && data >= 7500){
+			$scope.education_credit = 4500;
+			$scope.AOC = 3000;
+		} else if($scope.students == 3 && data < 7500){
+			educational_credit = data * .6;
+			$scope.education_credit = educational_credit;
+			$scope.AOC = data - educational_credit;
+		}
+
+		console.log($scope.education_credit, $scope.AOC);
 	}
 });
