@@ -20,17 +20,60 @@
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Services</a>
+                        <a class="page-scroll" href="#/services">Services</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Register</a>
+                        <a class="page-scroll" href="#/signup">Register/LogIn</a>
+                                              <!-- <a class="page-scroll " data-toggle="dropdown">register
+                                              <span class="caret"></span></a>
+                                              <form class="page-scroll dropdown-menu" method="post">
+                                                First Name:<input type="first_name" name="first_name" placeholder="First Name">
+                                                Last Name:<input type="Last_name" name="Last_name" placeholder="Last Name">
+                                                Email:<input type="email" name="user_email" placeholder="email">
+                                                Password:<input type="password" name="password" placeholder="password">
+                                                <hr>
+                                                <input type="submit" value="submit">
+                                              </form> -->
                     </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Log In</a>
-                    </li>
+                    <!-- <li>
+                        <a class="page-scroll login" href="">Log In</a>
+                                          <a class="page-scroll " data-toggle="dropdown">Log In
+                                          <span class="caret"></span></a>
+                                          <form class="page-scroll dropdown-menu" action="" method="post">
+                                            Email:<input type="email" name="user_email" placeholder="email">
+                                            Password:<input type="password" name="password" placeholder="password">
+                                            <hr>
+                                            <input type="submit" value="submit">
+                                          </form>
+
+                   </li> -->
                 </ul>
-            </div>
+
+          </div>
+
+<!-- <div data-role="main" class="ui-content">
+    <a href="#myPopup" data-rel="popup">log in</a>
+
+    <div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
+      <form method="post" action="demoform.asp">
+        <div>
+          <h3>Login information</h3>
+          <label for="usrnm" class="ui-hidden-accessible">Username:</label>
+          <input type="text" name="user" id="usrnm" placeholder="Username">
+          <label for="pswd" class="ui-hidden-accessible">Password:</label>
+          <input type="password" name="passw" id="pswd" placeholder="Password">
+          <label for="log">Keep me logged in</label>
+          <input type="checkbox" name="login" id="log" value="1" data-mini="true">
+          <input type="submit" data-inline="true" value="Log in">
+        </div>
+      </form>
+    </div>
+  </div>
+ -->
             <!-- /.navbar-collapse -->
+            <div data-role="main" class="ui-content">
+
+
         </div>
         <!-- /.container-fluid -->
     </nav>
@@ -70,140 +113,36 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
+                <div class="col-lg-4 col-md-6 text-center">
                     <div class="service-box">
-                        <img src="./../static/img/burst14million.png" alt="14 Million Returns Filed">
-                        <h3>Trusted Company</h3>
-                        <p class="text-muted">An authorized IRS e-file provider in United states</p>
+                        <a href="#/trusted"><img src="./../static/img/trust.png" alt="Returns Filed" style="height:100px;width:100px">
+                        <h3>Trusted Company</h3></a>
+                        <p class="text-muted">An authorized IRS e-file provider in United states of America</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
+
+                <div class="col-lg-4 col-md-6 text-center">
                     <div class="service-box">
-                        <img src="./../static/img/news.png" alt="In the news feed">
-                        <h3>Ready to Ship</h3>
-                        <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+                    <a href="#/news"><img src="./../static/img/news.png" alt="In the news feed">
+                        <h3>In The News</h3></a>
+                        <p class="text-muted">Our free software has been mentioned in Forbes and US news.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
+                <div class="col-lg-4 col-md-6 text-center">
                     <div class="service-box">
-                      <img src="./../static/img/news.png" alt="In the news feed">
-                        <h3>Up to Date</h3>
-                        <p class="text-muted">We update dependencies to keep things fresh.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                      <img src="./../static/img/calendar.png" alt="In the news feed">
-                        <h3>Made with Love</h3>
-                        <p class="text-muted">You have to make your websites with love these days!</p>
+                      <a href=""><img src="./../static/img/calendar.png" alt="In the news feed">
+                        <h3>Old Returns</h3></a>
+                        <p class="text-muted">Still need to file an old tax return? Free federal tax filing is still available for old returns.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="no-padding" id="portfolio">
-        <div class="container-fluid">
-            <div class="row no-gutter">
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="./../static/img/portfolio/1.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="./../static/img/portfolio/2.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="./../static/img/portfolio/3.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="./../static/img/portfolio/4.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="./../static/img/portfolio/5.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="./../static/img/portfolio/6.jpg" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <aside class="bg-dark">
         <div class="container text-center">
             <div class="call-to-action">
-                <h2>Free Download at Start Bootstrap!</h2>
-                <a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a>
+                <h2>Free Download your tax form!</h2>
+                <a href="#/1040" class="btn btn-default btn-xl wow tada">Download Now!</a>
             </div>
         </div>
     </aside>
@@ -214,7 +153,7 @@
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Let's Get In Touch!</h2>
                     <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p>That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
                     <i class="fa fa-phone fa-3x wow bounceIn"></i>
@@ -222,7 +161,7 @@
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                    <p><a href="mailto:your-email@your-domain.com">feedback@easytax.com</a></p>
                 </div>
             </div>
         </div>
