@@ -1,40 +1,229 @@
-<div class="blue">
-<div class="navbar navbar-default navbar-static-top" role="navigation">
-<div class="navbar-header">
-<a class="navbar-brand" href="#/dashboard">EZTax</a>
-</div>
-<div class="navbar-collapse collapse">
-<ul class="nav navbar-nav">
-<li class="active"><a href="#/dashboard">Home</a></li>
-<li><a href="#/dashboard">FAQ</a></li>
-<li><a href="#/dashboard">Contact</a></li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-<li><a href="#/dashboard">My Account</a></li>
-</ul>
-</div><!--/.nav-collapse -->
-</div>
-</div>
-<div class="container">
+<div ng-controller="TaxController">
+	<div class="blue">
+		<div class="navbar navbar-default navbar-static-top" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#/dashboard">EZTax</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#/dashboard">Home</a></li>
+					<li><a href="#/dashboard">FAQ</a></li>
+					<li><a href="#/dashboard">Contact</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#/dashboard">My Account</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+	<div> {{ age }}
 
-<label>marital status: </label>
-<select>
-	<option>Single</option>
-	<option>Married filing jointly</option>
-	<option>Married filing Separately</option>
-	<option>Head of household</option>
-	<option>Qualifying Widow</option>
-</select><br>
-<input type="text" placeholder="How many kids do you have?"><br>
-Are any of them < 17?
-<form>
-	<input type="radio" name="binary" value="yes" checked>Yes
-	<input type="radio" name="binary" value="no">No
-</form>
+	</div>
+	<div class="tax_return">
+		<div class="personal">
+			<h2>Personal</h2>
+			<hr class="full">
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Are you single or married? </h4>
+			<form class="col-sm-6 text-right" name="test">
+				<button class="btn btn-primary" ng-model="tax.deductionMaritalStatusSingle" name="single" ng-click="single()">
+					Single
+				</button>
+				<button class="btn btn-primary" ng-model="tax.deductionMaritalStatusMarried" name="married" ng-click="married()">
+					Married
+				</button>
+			</form>
+		</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">How old are you? </h4>
+				<div>
+					<input type="text" placeholder="age" name="age" ng-model="tax.age" ng-change="age(tax.age)" class="col-sm-3">
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">Are you claimed as a dependent?</h4>
+				<div class="col-sm-6 text-right">
+					<button class="btn btn-primary" ng-model="tax.dependent" ng-click="isaDependent()">Yes</button>
+					<button class="btn btn-primary" ng-model="tax.notDependent" ng-click="notaDependent()">No</button>
+				</div>
+			</div>
+			<div class="col-sm-12" ng-show="isDependent">
+				<h4 class="col-sm-6">Do you have Dependents?</h4>
+				<div class="col-sm-6 text-right">
+					<button class="btn btn-primary" ng-click="yesKids()">yes</button>
+					<button class="btn btn-primary" ng-click="noKids()">no</button>
+				</div>
+			</div>
+			<div ng-show="kids" class="col-sm-12">
+				<input type="text" class="col-sm-11" ng-model="tax.dependentsUnder17" ng-change="claimedDependents(tax.dependentsUnder17)" placeholder="how many dependents do you have?">
+<!-- 				<input type="text" class="col-sm-11" ng-model="tax.dependentsOver17" ng-change="claimedDependentsOver17(tax.dependentsOver17)" placeholder="how many are dependents 17-23 and a full-time student?"> -->
+<!-- 				<input type="text" class="col-sm-11" ng-model="tax.dependentsUnder17" ng-change="claimedDependents(tax.dependentsUnder17)" placeholder="how many are dependents age 16 or under?"> -->
+			</div>
+		</div>
+		<div class="income">
+			<h2>Income</h2>
+			<hr class="full">
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Total Income</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.totalIncome" ng-change="totalIncome(tax.totalIncome)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Your federal taxes withheld and estimated payments</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.federalTaxesWithheld" ng-change="federalTaxesWithheld(tax.federalTaxesWithheld)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+		</div>
 
-<input type="text" placeholder="Total income"><br>
-Do you have any other source of income, or nah?
-<input type="text" placeholder="alternative income">
-<input type="text" placeholder="alternative income">
+		<div class="deduction">
+			<h2>Deductions</h2>
+			<hr class="full">
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Student Loan Interest Paid</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.studentLoanInterest" ng-change="studentLoanInterest(tax.studentLoanInterest)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Medical and Dental expenses paid</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.medicalExpenses" ng-change="medicalExpenses(tax.medicalExpenses)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+			<div class="col-sm-12">
+			<h4 class="col-sm-6">Amount of State Taxes Paid</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.stateTaxes" ng-change="stateTaxes(tax.stateTaxes)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">Amount of Mortgage Interest Paid</h4>
+				  <div class="form-inline form-group inline col-sm-6">
+				    <div class="input-group">
+				      <div class="input-group-addon">$</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.mortgageInterest" ng-change="mortgageInterest(tax.mortgageInterest)">
+				      <div class="input-group-addon">.00</div>
+				    </div>
+				  </div>
+			</div>
+		</div>
+		<div class="credits">
+			<h2>Credits</h2>
+			<hr class="full">
+				<div class="col-sm-12">
+					<h4 class="col-sm-6">Did you have any collge education expenses?</h4>
+					<div class="col-sm-6 text-right">
+						<button class="btn btn-primary" ng-model="tax.yesEducationExpenses" ng-click="paysEducationExpenses()">Yes</button>
+						<button class="btn btn-primary" ng-model="tax.noEducationExpenses" ng-click="noEducationExpenses()">No</button>
+					</div>
+				</div>
+				<div class="col-sm-12" ng-show="education">
+					<h4 class="col-sm-6">how many students are enrolled full-time?</h4>
+					<div class="col-sm-6 text-right">
+						<button class="btn btn-primary" ng-model="tax.student" ng-click="student(1)">1</button>
+						<button class="btn btn-primary" ng-model="tax.student" ng-click="student(2)">2</button>
+						<button class="btn btn-primary" ng-model="tax.student" ng-click="student(3)">3</button>
+					</div>
+				</div>
+				<div class="col-sm-12" ng-show="education">
+					<h4 class="col-sm-6">Qualifying education expenses</h4>
+				    <div class="form-inline form-group inline col-sm-6">
+					    <div class="input-group">
+					      <div class="input-group-addon">$</div>
+						      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.educationExpenses" ng-change="educationExpenses(tax.educationExpenses)">
+					      <div class="input-group-addon">.00</div>
+					    </div>
+					</div>
+				</div>
+		</div>
+	<div class="col-sm-12">
+	<button href="#/results" class="btn btn-primary text-right col-sm-12">Submit</button>
+	</div>
+	</div>
 
+	<div class="tax_wrapper">
+<!-- 		<div class="taxes">
+			<h4 class="current_tax">
+				Forecasted Refund
+			</h4>
+			<h4 class="forecasted_refund">
+				{{ forecastedReturn }}
+			</h4>
+		</div> -->
+		<div class="taxes_summary">
+			<h4>Summary</h4><br>
+			<div class="row default-text" ng-show="maritalStatus">
+				<h4 class="padding-left col-sm-6">Filing Status</h4>
+				<h4 class="spacing col-sm-6">{{ maritalStatus }}</h4>
+			</div>
+			<hr class="full" ng-show="maritalStatus">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Total Income</h4>
+				<h4 class="spacing col-sm-6">${{ incomeTotal }}</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text" ng-show="taxesWithheld">
+				<h4 class="padding-left col-sm-6">Federal Taxes Withheld</h4>
+				<h4 class="spacing col-sm-6">${{ taxesWithheld }}</h4>
+			</div>
+			<hr ng-show="taxesWithheld" class="full">
+	<!-- 		<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Adjusted Income</h4>
+				<h4 class="spacing col-sm-6">$0.00</h4>
+			</div>
+			<hr class="full"> -->
+			<div class="row default-text" ng-show="numberOfDependents">
+				<h4 class="padding-left col-sm-6">Dependents</h4>
+				<h4 class="spacing col-sm-6">{{ numberOfDependents }}</h4>
+			</div>
+			<hr ng-show="numberOfDependents" class="full">
+
+			<div class="row default-text" ng-show="adjustments">
+				<h4 class="padding-left col-sm-6">Adjustments</h4>
+				<h4 class="spacing col-sm-6">${{ adjustments }}</h4>
+			</div>
+			<hr class="full" ng-show="adjustments">
+			<div class="row default-text" ng-show="deduction">
+				<h4 class="padding-left col-sm-6">Deductions</h4>
+				<h4 class="spacing col-sm-6">${{ deduction }}</h4>
+			</div>
+				<hr ng-show="deduction" class="full">
+			<div class="row default-text" ng-show="exemption">
+				<h4 class="padding-left col-sm-6">Exemptions</h4>
+				<h4 class="spacing col-sm-6">${{ exemption }}</h4>
+			</div>				
+			<hr ng-show="exemption" class="full">
+			<div class="row default-text" ng-show="education_credit">
+				<h4 class="padding-left col-sm-6">Education Credit</h4>
+				<h4 class="spacing col-sm-6">${{ education_credit }}</h4>
+			</div>
+			<hr ng-show="education_credit" class="full">
+			<div class="row default-text" ng-show="AOC">
+				<h4 class="padding-left col-sm-6">American Opportunity Credit</h4>
+				<h4 class="spacing col-sm-6">${{ AOC }}</h4>
+			</div>
+		</div>
+	</div>
 </div>
