@@ -26,10 +26,10 @@
 			<div class="col-sm-12">
 			<h4 class="col-sm-6">Are you single or married? </h4>
 			<form class="col-sm-6 text-right" name="test">
-				<button class="btn btn-primary" ng-model="tax.deductionMaritalStatusSingle" name="single" ng-click="single()">
+				<button class="btn btn-primary" ng-model="tax.single" ng-click="single('single')">
 					Single
 				</button>
-				<button class="btn btn-primary" ng-model="tax.deductionMaritalStatusMarried" name="married" ng-click="married()">
+				<button class="btn btn-primary" ng-model="tax.married" name="married" ng-click="married('married')">
 					Married
 				</button>
 			</form>
@@ -37,14 +37,14 @@
 			<div class="col-sm-12">
 				<h4 class="col-sm-6">How old are you? </h4>
 				<div>
-					<input type="text" placeholder="age" ng-model="tax.age" ng-change="age(tax.age)" class="col-sm-3 fixed">
+					<input type="text" placeholder="age" ng-model="tax.age" ng-change="age()" class="col-sm-3 fixed">
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<h4 class="col-sm-6">Are you claimed as a dependent?</h4>
 				<div class="col-sm-6 text-right">
-					<button class="btn btn-primary" ng-model="tax.dependent" ng-click="isaDependent()">Yes</button>
-					<button class="btn btn-primary" ng-model="tax.notDependent" ng-click="notaDependent()">No</button>
+					<button class="btn btn-primary" ng-model="tax.dependent" ng-click="isaDependent('yes')">Yes</button>
+					<button class="btn btn-primary" ng-model="tax.notDependent" ng-click="isaDependent('no')">No</button>
 				</div>
 			</div>
 			<div class="col-sm-12" ng-show="isDependent">
@@ -55,24 +55,75 @@
 				</div>
 			</div>
 			<div ng-show="kids" class="col-sm-12">
-				<input type="text" class="col-sm-11" ng-model="tax.dependentsUnder17" ng-change="claimedDependents(tax.dependentsUnder17)" placeholder="how many dependents do you have?">
+				<input type="text" class="col-sm-11" ng-model="tax.dependents" ng-change="claimedDependents()" placeholder="how many dependents do you have?">
 <!-- 				<input type="text" class="col-sm-11" ng-model="tax.dependentsOver17" ng-change="claimedDependentsOver17(tax.dependentsOver17)" placeholder="how many are dependents 17-23 and a full-time student?"> -->
 <!-- 				<input type="text" class="col-sm-11" ng-model="tax.dependentsUnder17" ng-change="claimedDependents(tax.dependentsUnder17)" placeholder="how many are dependents age 16 or under?"> -->
 			</div>
 		</div>
-		<div class="income">
+	<div class="income">
 			<h2>Income</h2>
 			<hr class="full">
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">Taxable wages </h4>
+				<div class="form-inline form-group inline col-sm-6">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" placeholder="Amount" name="ta" ng-model="tax.taxableWage" ng-change="taxableWage(tax.taxableWage)" class="form-control">
+					    <div class="input-group-addon">.00</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">Net Business income (or loss) </h4>
+				<div class="form-inline form-group inline col-sm-6">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>	
+							<input type="text" placeholder="Amount" name="exampleInputAmount" ng-model="tax.netBusinessIncome" ng-change="netBusinessIncome(tax.netBusinessIncome)" class="form-control">
+					    <div class="input-group-addon">.00</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">Interest income</h4>
+				<div class="form-inline form-group inline col-sm-6">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>	
+						<input type="text" placeholder="Amount" name="exampleInputAmount" ng-model="tax.interestIncome" ng-change="interestIncome(tax.interestIncome)" class="form-control">
+				    <div class="input-group-addon">.00</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">Dividend income</h4>
+				<div class="form-inline form-group inline col-sm-6">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>					<input type="text" placeholder="Amount" name="exampleInputAmount" ng-model="tax.dividendIncome" ng-change="dividendIncome(tax.dividendIncome)" class="form-control">
+					    <div class="input-group-addon">.00</div>
+					</div>
+				</div>	
+			</div>
+			<div class="col-sm-12">
+				<h4 class="col-sm-6">State tax refund</h4>
+			<div class="form-inline form-group inline col-sm-6">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>					<input type="text" placeholder="Amount" name="exampleInputAmount" ng-model="tax.stateTaxRefund" ng-change="stateTaxRefund(tax.stateTaxRefund)" class="form-control">
+					    <div class="input-group-addon">.00</div>
+					</div>
+				</div>	
+			</div>
 			<div class="col-sm-12">
 			<h4 class="col-sm-6">Total Income</h4>
 				  <div class="form-inline form-group inline col-sm-6">
 				    <div class="input-group">
-				      <div class="input-group-addon">$</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.totalIncome" ng-change="totalIncome(tax.totalIncome)">
-				      <div class="input-group-addon">.00</div>
+				      <!-- <div class="input-group-addon">$</div> -->
+				      <button class="btn btn-primary" ng-model="tax.totalIncome" ng-click="totalIncome()">Calculate</button>
+				     
+				 <!--     Hong's add end-->
+				      <!-- <div class="input-group-addon">.00</div> -->
 				    </div>
 				  </div>
 			</div>
+
 			<div class="col-sm-12">
 			<h4 class="col-sm-6">Your federal taxes withheld and estimated payments</h4>
 				  <div class="form-inline form-group inline col-sm-6">
@@ -103,7 +154,7 @@
 				  <div class="form-inline form-group inline col-sm-6">
 				    <div class="input-group">
 				      <div class="input-group-addon">$</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.medicalExpenses" ng-change="medicalExpenses(tax.medicalExpenses)">
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.medicalExpenses" ng-change="expenses()">
 				      <div class="input-group-addon">.00</div>
 				    </div>
 				  </div>
@@ -113,7 +164,7 @@
 				  <div class="form-inline form-group inline col-sm-6">
 				    <div class="input-group">
 				      <div class="input-group-addon">$</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.stateTaxes" ng-change="stateTaxes(tax.stateTaxes)">
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.stateTaxes" ng-change="expenses()">
 				      <div class="input-group-addon">.00</div>
 				    </div>
 				  </div>
@@ -123,7 +174,7 @@
 				  <div class="form-inline form-group inline col-sm-6">
 				    <div class="input-group">
 				      <div class="input-group-addon">$</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.mortgageInterest" ng-change="mortgageInterest(tax.mortgageInterest)">
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.mortgageInterest" ng-change="expenses()">
 				      <div class="input-group-addon">.00</div>
 				    </div>
 				  </div>
@@ -152,14 +203,14 @@
 				    <div class="form-inline form-group inline col-sm-6">
 					    <div class="input-group">
 					      <div class="input-group-addon">$</div>
-						      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.educationExpenses" ng-change="educationExpenses(tax.educationExpenses)">
+						      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="tax.educationExpenses" ng-change="educationExpenses()">
 					      <div class="input-group-addon">.00</div>
 					    </div>
 					</div>
 				</div>
 		</div>
 	<div class="col-sm-12">
-	<a href="#/results" class="btn btn-primary text-right col-sm-12">Submit</a>
+	<a ng-click="testing()" class="btn btn-primary text-right col-sm-12">Submit</a>
 	</div>
 	</div>
 

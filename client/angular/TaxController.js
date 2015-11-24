@@ -1,11 +1,9 @@
-app.controller("TaxController", function($scope) {
-	console.log($scope);
+app.controller("TaxController", function($scope, TaxFactory) {
 	var deductionMaritalStatus = null;
 	var deductionAge = null;
 	var exemptionDependent = null;
 	var kids = false;
-	var dependentsUnder16 = 0;
-	var dependentsOver17 = 0;
+	var dependents = 0;
 	var isDependent = false;
 	var numberOfDependents = 0;
 	var federalTaxesWithheld;
@@ -19,48 +17,38 @@ app.controller("TaxController", function($scope) {
 	// 	alert("test");
 	// });
 	$scope.forecastedReturn = $scope.incomeTotal;
-	
 
-	$scope.single = function() {
+	$scope.single = function(info) {
+
+		TaxFactory.maritalStatus(info, function (output) {
+			console.log(output)
+			// $scope.tax(output);
+			info = {};
+		});
 		$scope.maritalStatus = "Single";
 		deductionMaritalStatus = 6300;
 		$scope.deduction = deductionMaritalStatus;
 	};
-	$scope.married = function() {
+	$scope.married = function(info) {
+		TaxFactory.maritalStatus(info, function (output) {
+			info = {};
+		})
 		$scope.maritalStatus = "Married";
 		deductionMaritalStatus = 12600;
 		$scope.deduction = deductionMaritalStatus;
 	};
-	$scope.age = function(data) {
-		if(data < 65 && ($scope.deduction == 6300|| $scope.deduction == 7850)){
-			deductionAge = 6300;
-			$scope.deductionAge = deductionAge;
-		} else if(data > 65 && $scope.deduction == 6300) {
-			deductionAge = 7850;
-			$scope.deductionAge = deductionAge;
-		} else if(data < 65 && ($scope.deduction == 12600 || $scope.deduction == 14150)) {
-			deductionAge = 12600;
-			$scope.deductionAge = deductionAge;
-		} else if(data > 65 && $scope.deduction == 12600) {
-			deductionAge = 14150;
-			$scope.deductionAge = deductionAge;
-		}
-		$scope.deduction = deductionAge;
+	$scope.age = function() {
+		TaxFactory.age($scope.tax, function (output) {
+		$scope.deduction = output;
+
+		})
 	}
-	$scope.isaDependent = function(){
-		isDependent = false;
-		$scope.isDependent = isDependent;
-		exemptionDependent = 0;
-		$scope.exemption = exemptionDependent;
-		$scope.Dependent
-		console.log($scope.exemption)
-	}
-	$scope.notaDependent = function(){
-		isDependent = true;
-		$scope.isDependent = isDependent;
-		exemptionDependent = 4000;
-		$scope.exemption = exemptionDependent;
-		console.log($scope.exemption)
+	$scope.isaDependent = function(info){
+		TaxFactory.isDependent(info, function(output) {
+			$scope.exemption = output.exemption;
+			$scope.isDependent = output.isDependent;
+		})
+
 	}
 	$scope.yesKids = function() {
 		kids = true;
@@ -70,150 +58,69 @@ app.controller("TaxController", function($scope) {
 		kids = false;
 		$scope.kids = kids;
 	}
-	$scope.claimedDependents = function (data) {
-		dependentsUnder16 = data * 4000;
-		numberOfDependents = data;
-		$scope.numberOfDependents = numberOfDependents;
-		console.log(dependentsUnder16)
-		if(data){
-			$scope.exemption = dependentsUnder16 + $scope.exemption;
-			console.log("hello")
-		} else{
+	$scope.claimedDependents = function () {
+		TaxFactory.claimedDependents($scope.tax, function (output) {
+			console.log(output)
+		$scope.numberOfDependents=output.dependents;
+		if(output.dependents > 0){	
+		$scope.exemption = output.exemptionDependent + $scope.exemption;
+		} else if(output.dependents == 0) {
 			$scope.exemption = 4000;
 		}
-		console.log($scope.exemption)
+		})
 	}
-	// $scope.claimedDependentsOver17 = function (data) {
-	// 	dependentsOver17 = data * 4000;
-	// 	console.log(data)
-	// 	numberOfDependents = data;
-	// 	$scope.numberOfDependents = numberOfDependents;
-	// 	console.log(dependentsUnder16)
-	// 	if(data){
-	// 		$scope.exemption = dependentsUnder16 + $scope.exemption;
-	// 		console.log("hello")
-	// 	} else{
-	// 		$scope.exemption = 4000;
-	// 	}
-	// 	console.log($scope.exemption)
-	// }
-	$scope.totalIncome = function (data) {
-		incomeTotal = data;
-		$scope.incomeTotal = incomeTotal;
+		$scope.taxableWage = function (){
+		TaxFactory.taxableWage($scope.tax, function (output){
+			$scope.wageTaxable = output;
+		});
 	}
-	$scope.studentLoanInterest = function (data) {
-		studentLoanInterest = parseInt(data);
-		$scope.studentInterest = studentLoanInterest;
-		// $scope.deduction = $scope.deductionAge + studentLoanInterest;
-		// if(!data){
-		// 	$scope.deduction= $scope.deductionAge;
-		// }
-		$scope.adjustments = studentLoanInterest;
+
+	$scope.netBusinessIncome = function (){
+		TaxFactory.netBusinessIncome($scope.tax, function (output){
+			$scope.businessIncome = output;
+		});
 	}
-	$scope.federalTaxesWithheld = function (data) {
-		federalTaxesWithheld = data;
-		$scope.taxesWithheld = federalTaxesWithheld;
+
+	$scope.interestIncome = function (){
+		TaxFactory.interestIncome($scope.tax, function (output){
+			$scope.incomeInterest = output;
+		});
 	}
-	$scope.medicalExpenses = function (data) {
-		medicalExpenses = parseInt(data);
-		$scope.medical = medicalExpenses;
-		if(medicalExpenses && $scope.state && $scope.mortgage){
-			console.log(1);
-			$scope.itemizedDeduction = $scope.medical + $scope.state + $scope.mortgage;
-		} else if(medicalExpenses && $scope.state && !$scope.mortgage){
-			console.log(2);
-			$scope.itemizedDeduction = $scope.state + $scope.medical;
-		} else if(medicalExpenses && $scope.mortgage && !$scope.state){
-			console.log(3);
-			$scope.itemizedDeduction = $scope.medical + $scope.mortgage;
-		} else if(medicalExpenses == NaN && $scope.mortgage && !$scope.state){
-			console.log(4);
-			$scope.itemizedDeduction = $scope.mortgage;
-		} else if(medicalExpenses == NaN && !$scope.mortgage && $scope.state){
-			console.log(5);
-			$scope.itemizedDeduction = $scope.state;
-		} else if(medicalExpenses && !$scope.mortgage && !$scope.state){
-			console.log(6);
-			$scope.itemizedDeduction = $scope.medical;
-		} else {
-			console.log(9);
-			$scope.itemizedDeduction = $scope.mortgage + $scope.state;
-		} 
-		if($scope.itemizedDeduction > $scope.deductionAge){
-			$scope.deduction = $scope.itemizedDeduction;
-			console.log(7);
-		} else if($scope.itemizedDeduction < $scope.deductionAge){
-			console.log(8);
-			$scope.deduction = $scope.deductionAge;
-		}
+
+	$scope.dividendIncome = function (){
+		TaxFactory.dividendIncome($scope.tax, function (output){
+			$scope.incomeDividend = output;
+		});
 	}
-	$scope.stateTaxes = function (data) {
-		stateTaxes = parseInt(data);
-		$scope.state = stateTaxes;
-		console.log(stateTaxes)
-		if(stateTaxes && $scope.medical && $scope.mortgage){
-			console.log(1);
-			$scope.itemizedDeduction = $scope.medical + $scope.state + $scope.mortgage;
-		} else if(stateTaxes && $scope.medical && !$scope.mortgage){
-			console.log(2);
-			$scope.itemizedDeduction = $scope.state + $scope.medical;
-		} else if(stateTaxes && $scope.mortgage && !$scope.medical){
-			console.log(3);
-			$scope.itemizedDeduction = $scope.state + $scope.mortgage;
-		} else if(stateTaxes == NaN && $scope.mortgage && !$scope.medical){
-			console.log(4);
-			$scope.itemizedDeduction = $scope.mortgage;
-		} else if(stateTaxes == NaN && !$scope.mortgage && $scope.medical){
-			console.log(5);
-			$scope.itemizedDeduction = $scope.medical;
-		} else if(stateTaxes && !$scope.mortgage && !$scope.medical){
-			console.log(6);
-			$scope.itemizedDeduction = $scope.state;
-		} else {
-			console.log(9);
-			$scope.itemizedDeduction = $scope.mortgage + $scope.medical;
-		} 
-		if($scope.itemizedDeduction > $scope.deductionAge){
-			$scope.deduction = $scope.itemizedDeduction;
-			console.log(7);
-		} else if($scope.itemizedDeduction < $scope.deductionAge){
-			console.log(8);
-			$scope.deduction = $scope.deductionAge;
-		}
+
+	$scope.stateTaxRefund = function (){
+		TaxFactory.stateTaxRefund($scope.tax, function (output){
+			$scope.taxRefundState = output;
+		});
 	}
-	$scope.mortgageInterest = function (data) {
-		mortgageInterest = parseInt(data);
-		$scope.mortgage = mortgageInterest;
-		console.log($scope.mortgage)
-		if(mortgageInterest && $scope.state && $scope.medical){
-			console.log(1);
-			$scope.itemizedDeduction = $scope.medical + $scope.state + $scope.mortgage;
-		} else if(mortgageInterest && $scope.state && !$scope.medical){
-			console.log(2);
-			$scope.itemizedDeduction = $scope.state + $scope.mortgage;
-		} else if(mortgageInterest && $scope.medical && !$scope.state){
-			console.log(3);
-			$scope.itemizedDeduction = $scope.medical + $scope.mortgage;
-		} else if(mortgageInterest == NaN && $scope.medical && !$scope.state){
-			console.log(4);
-			$scope.itemizedDeduction = $scope.medical;
-		} else if(mortgageInterest == NaN && !$scope.medical && $scope.state){
-			console.log(5);
-			$scope.itemizedDeduction = $scope.state;
-		} else if(mortgageInterest && !$scope.mortgage && !$scope.state){
-			console.log(6);
-			$scope.itemizedDeduction = $scope.mortgage;
-		} else {
-			console.log(9);
-			$scope.itemizedDeduction = $scope.medical + $scope.state;
-		} 
-		if($scope.itemizedDeduction > $scope.deductionAge){
-			$scope.deduction = $scope.itemizedDeduction;
-			console.log(7);
-		} else if($scope.itemizedDeduction < $scope.deductionAge){
-			console.log(8);
-			$scope.deduction = $scope.deductionAge;
-		}
+
+	$scope.totalIncome = function () {
+		TaxFactory.totalIncome(function (output){
+			$scope.incomeTotal = output;
+		})
+	}
+
+	$scope.studentLoanInterest = function () {
+		TaxFactory.studentLoanInterest($scope.tax, function (output){
+			$scope.studentInterest = output;
+			$scope.adjustments = $scope.studentInterest;
+		});
+	}
+	$scope.federalTaxesWithheld = function () {
+		TaxFactory.federalTaxesWithheld($scope.tax, function (output){
+			$scope.taxesWithheld = output;		
+		})
+	}
+	$scope.expenses = function (){
+		TaxFactory.expenses($scope.tax, function (output){
+			$scope.medicalExpenses = output.medicalExpenses;
+			$scope.deduction = output.deduction;
+		})
 	}
 	$scope.paysEducationExpenses = function () {
 		education = true;
@@ -224,33 +131,16 @@ app.controller("TaxController", function($scope) {
 		$scope.education = education;
 	}
 	$scope.student = function (data) {
-		var students = parseInt(data);
-		$scope.students = students;
+		TaxFactory.student(data, function (output){
+		})
 	}
-	$scope.educationExpenses = function (data) {
-		if($scope.students == 1 && data >= 2500){
-			$scope.education_credit = 1500;
-			$scope.AOC = 1000;
-		} else if($scope.students == 1 && data < 2500){
-			educational_credit = data * .6;
-			$scope.education_credit = educational_credit;
-			$scope.AOC = data - educational_credit;
-		} else if($scope.students == 2 && data >= 5000){
-			$scope.education_credit = 3000;
-			$scope.AOC = 2000;
-		} else if($scope.students == 2 && data < 5000){
-			educational_credit = data * .6;
-			$scope.education_credit = educational_credit;
-			$scope.AOC = data - educational_credit;
-		} else if($scope.students == 3 && data >= 7500){
-			$scope.education_credit = 4500;
-			$scope.AOC = 3000;
-		} else if($scope.students == 3 && data < 7500){
-			educational_credit = data * .6;
-			$scope.education_credit = educational_credit;
-			$scope.AOC = data - educational_credit;
-		}
+	$scope.educationExpenses = function () {
+		TaxFactory.educationExpenses($scope.tax, function (output) {
+			$scope.education_credit = output.education_credit;
+			$scope.AOC = output.AOC;
+			console.log(output)
+		})
 
-		console.log($scope.education_credit, $scope.AOC);
+		// console.log($scope.education_credit, $scope.AOC);
 	}
 });

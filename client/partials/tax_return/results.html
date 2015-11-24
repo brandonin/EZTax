@@ -1,1 +1,53 @@
-hello
+		<div class="taxes_summary">
+			<h4>Summary</h4><br>
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Filing Status</h4>
+				<h4 class="spacing col-sm-6">{{ maritalStatus }}</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Total Income</h4>
+				<h4 class="spacing col-sm-6">${{ incomeTotal }}</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Federal Taxes Withheld</h4>
+				<h4 class="spacing col-sm-6">${{ taxesWithheld }}</h4>
+			</div>
+			<hr class="full">
+	<!-- 		<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Adjusted Income</h4>
+				<h4 class="spacing col-sm-6">$0.00</h4>
+			</div>
+			<hr class="full"> -->
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Dependents</h4>
+				<h4 class="spacing col-sm-6">{{ numberOfDependents }}</h4>
+			</div>
+			<hr class="full">
+
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Adjustments</h4>
+				<h4 class="spacing col-sm-6">${{ adjustments }}</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Deductions</h4>
+				<h4 class="spacing col-sm-6">${{ deduction }}</h4>
+			</div>
+				<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Exemptions</h4>
+				<h4 class="spacing col-sm-6">${{ exemption }}</h4>
+			</div>				
+			<hr class="full">
+			<div class="row default-text">
+				<h4 class="padding-left col-sm-6">Education Credit</h4>
+				<h4 class="spacing col-sm-6">${{ education_credit }}</h4>
+			</div>
+			<hr class="full">
+			<div class="row default-text" >
+				<h4 class="padding-left col-sm-6">American Opportunity Credit</h4>
+				<h4 class="spacing col-sm-6">${{ AOC }}</h4>
+			</div>
+		</div>
