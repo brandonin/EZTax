@@ -1,6 +1,7 @@
 app.factory('UserFactory', function($http) {
 	var factory = {};
 	var users = [];
+	var user = {};
 	var errors;
 	factory.getUsers = function(callback) {
 		$http.get('/users').success(function(output){
@@ -9,22 +10,10 @@ app.factory('UserFactory', function($http) {
 		});
 	};
 	factory.addUser = function(info, callback) {
-		var count = 0;
-		for(var user in users) {
-			if(info.name == users[user].name)
-			{
-				count++;
-			}
-		}
-		if(count>0) {
-			errors = {message: "Username already exists"};
-			callback(errors)
-		} else {
-			$http.post('/addUser', info).success(function (output) {
-				users.push({name: info.name, created_at: new Date()})
-			});
-		}
-		
+		$http.post('/addUser', info).success(function (output) {
+			user = output;
+			callback(user);
+		});
 	};
 	factory.removeUser = function(info, callback) {
 		$http.get('/removeUser/' + info, info).success(function (output) {

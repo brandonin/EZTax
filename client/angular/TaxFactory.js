@@ -128,6 +128,10 @@ app.factory('TaxFactory', function($http) {
 			itemizedDeduction = stateTaxes;
 		} else if(medicalExpenses && !mortgageInterest && !stateTaxes){
 			itemizedDeduction = medicalExpenses;
+		} else if(!medicalExpenses && !mortgageInterest && stateTaxes){
+			itemizedDeduction = stateTaxes;
+		} else if(!medicalExpenses && mortgageInterest && !stateTaxes){
+			itemizedDeduction = mortgageInterest;
 		} else {
 			itemizedDeduction = mortgageInterest + stateTaxes;
 		} 

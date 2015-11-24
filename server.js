@@ -9,8 +9,8 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// require('./server/config/mongoose.js');
-// require('./server/config/routes.js')(app);
+require('./server/config/mongoose.js');
+require('./server/config/routes.js')(app);
 
 
 app.use(express.static(path.join(__dirname, './client')));

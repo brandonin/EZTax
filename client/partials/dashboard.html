@@ -1,21 +1,43 @@
+<div ng-controller="UsersController">
+	<!-- Static navbar -->
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+	<div class="container-fluid">
+	<div class="navbar-header">
+	<a class="navbar-brand" href="#/dashboard">EZTax</a>
+	</div>
+	<div class="navbar-collapse collapse">
+	<ul class="nav navbar-nav">
+	<li class="active"><a href="#/dashboard">Home</a></li>
+	<li><a href="#/dashboard">FAQ</a></li>
+	<li><a href="#/dashboard">Contact</a></li>
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+	<li><a href="#/dashboard">My Account</a></li>
+	</ul>
+	</div><!--/.nav-collapse -->
+	</div>
+	</div>
+	<div class="middle">
+	<a  href="#/tax_return">
+	<div class="startReturn" href="#/tax_return">
+	<img src="./../static/img/calendar.png" class="centered">
+	<button class="btn btn-primary">Start your 2015 return</button>
+	</div>
+	</a>
+	<a  href="#/dashboard">
+	<div class="startReturn">
+	<img src="./../static/img/box.png" class="centered">
+	<button class="btn btn-primary">Check Previous Return</button>
+	</div>
+	</a>
+	<a  href="#/dashboard">
+	<div class="startReturn">
+	<img src="./../static/img/woman.png" class="centered">
+	<button class="btn btn-primary">Get Customer Support</button>
+	</div>
+	</a>
+	</div>
+	<footer class="footer">
 
-<!-- Static navbar -->
-<div class="navbar navbar-default navbar-static-top" role="navigation">
-<div class="container">
-<div class="navbar-header">
-<a class="navbar-brand" href="#/dashboard">EZTax</a>
+	</footer>
 </div>
-<div class="navbar-collapse collapse">
-<ul class="nav navbar-nav">
-<li class="active"><a href="#/dashboard">Home</a></li>
-<li><a href="#/dashboard">FAQ</a></li>
-<li><a href="#/dashboard">Contact</a></li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-<li><a href="#/dashboard">My Account</a></li>
-</ul>
-</div><!--/.nav-collapse -->
-</div>
-</div>
-
-<a class="btn btn-primary" href="#/tax_return">Start your 2015 return</a>

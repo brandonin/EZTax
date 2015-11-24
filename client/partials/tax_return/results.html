@@ -1,5 +1,5 @@
 <div ng-controller="TaxController">
-	<div class="tax-wrapper">	
+	<div class="tax-wrapper">
 		<div class="taxes" ng-show="taxes.forecastedReturn">
 			<h4 class="current_tax">
 				Forecasted Refund
@@ -52,7 +52,7 @@
 			<div class="row default-text" ng-show="taxes.exemption">
 				<h4 class="padding-left col-sm-6">Exemptions</h4>
 				<h4 class="spacing col-sm-6">${{ taxes.exemption }}</h4>
-			</div>				
+			</div>
 			<hr class="full" ng-show="taxes.exemption">
 			<div class="row default-text" ng-show="taxes.education_credit">
 				<h4 class="padding-left col-sm-6">Education Credit</h4>
@@ -63,6 +63,65 @@
 				<h4 class="padding-left col-sm-6">American Opportunity Credit</h4>
 				<h4 class="spacing col-sm-6">${{ taxes.AOC }}</h4>
 			</div>
+		</div>
+	</div>
+
+</div>
+<div class="result_side">
+	<h2>improve your skills</h2>
+	<div class="container flow">
+			<div class="row">
+					<div class="col-lg-2 col-md-6 text-center">
+							<div class="service-box">
+									<img src="./../static/img/codingdojo.png" alt="Returns Filed" style="height:100px;width:100px">
+									<a href="http://www.codingdojo.com"><h3>Coding Dojo</h3></a>
+									<p class="text-muted">coding Dojo is the most extensive coding bootcamp in the industry.</p>
+							</div>
+					</div>
+
+					<div class="col-lg-2 col-md-6 text-center">
+							<div class="service-box">
+							<img src="./../static/img/couseraa.png" alt="In the news feed">
+									<a href="https://www.coursera.org"><h3>Cousera</h3></a>
+									<p class="text-muted">Coursera provides universal access to the world’s best education, partnering with top universities and organizations to offer courses online.</p>
+							</div>
+					</div>
+					<div class="col-lg-2 col-md-6 text-center">
+							<div class="service-box">
+								<img src="./../static/img/code.png" alt="In the news feed">
+									<a href="https://www.codecademy.com"><h3>CodeCademy</h3></a>
+									<p class="text-muted">Codecademy is an online interactive platform that offers free coding classes in 9 different programming languages.</p>
+							</div>
+					</div>
+			</div>
+	</div>
+	<div>
+	<h2>Maximize your tax returns</h3>
+		<div class="container flow">
+				<div class="row">
+						<div class="col-lg-2 col-md-6 text-center">
+								<div class="service-box">
+										<img src="./../static/img/lendingclub.jpg"  class="image-fixed" alt="Returns Filed" style="height:100px;width:100px">
+										<a href="https://www.lendingclub.com"><h3>Lending Club</h3></a>
+										<p class="text-muted">Lending Club is the world’s largest online marketplace connecting borrowers and investors.</p>
+								</div>
+						</div>
+
+						<div class="col-lg-2 col-md-6 text-center">
+								<div class="service-box">
+								<img src="./../static/img/acrons.jpg"  class="image-fixed" alt="In the news feed">
+										<a href="https://www.acorns.com"><h3>Acornes</h3></a>
+										<p class="text-muted">Acorns automatically invests your spare change. Our mobile-first investment platform enables commission free investing.</p>
+								</div>
+						</div>
+						<div class="col-lg-2 col-md-6 text-center">
+								<div class="service-box">
+									<img src="./../static/img/mint.png" class="image-fixed" alt="In the news feed">
+										<a href="https://www.mint.com"><h3>Mint</h3></a>
+										<p class="text-muted">Manage your money, pay your bills and track your credit score with Mint.</p>
+								</div>
+						</div>
+				</div>
 		</div>
 	</div>
 </div>

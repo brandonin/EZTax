@@ -1,3 +1,4 @@
+<div ng-controller="UsersController">
 <div class="form">
 
       <ul class="tab-group">
@@ -13,35 +14,24 @@
 
           <div class="top-row">
             <div class="field-wrap">
-              <label>
-                First Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
+              <input type="text" required autocomplete="off" placeholder="First Name" ng-model="new_user.first_name"/>
             </div>
 
             <div class="field-wrap">
-              <label>
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
+
+              <input type="text"required autocomplete="off" placeholder="Last Name" ng-model="new_user.last_name"/>
             </div>
           </div>
 
           <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
+            <input type="email"required autocomplete="off" placeholder="Email Address" ng-model="new_user.email"/>
           </div>
 
           <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
+            <input type="password"required autocomplete="off" placeholder="Set A Password" ng-model="new_user.password"/>
           </div>
 
-          <button type="submit" class="button button-block"/>Get Started</button>
+          <a class="button button-block text-center" href="#/dashboard" ng-click="addUser()" />Get Started</a>
 
           </form>
 
@@ -75,3 +65,4 @@
         </div> -->
 </div>
       </div>
+</div>

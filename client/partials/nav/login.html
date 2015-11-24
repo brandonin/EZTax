@@ -1,8 +1,8 @@
+<div ng-model="UsersController">
 <div class="form">
-
       <ul class="tab-group">
-        <li class="tab"><a href="#signup">Sign Up</a></li>
-        <li class="tab active"><a href="#login">Log In</a></li>
+        <li class="tab"><a href="#/signup">Sign Up</a></li>
+        <li class="tab active"><a href="#/login">Log In</a></li>
       </ul>
   <!-- <h3>Sign Up</h3 -->
       <div class="tab-content">
@@ -12,22 +12,14 @@
           <form  method="post">
 
             <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
+            <input type="email"required placeholder="Email Address" autocomplete="off"/>
           </div>
 
           <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
+            <input type="password" placeholder="Password" required autocomplete="off"/>
           </div>
 
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
-
-          <button class="button button-block"/>Log In</button>
+          <a href="#/dashboard" class="button button-block text-center"/>Log In</a>
 
           </form>
 
@@ -67,10 +59,11 @@
             <input type="password"required autocomplete="off"/>
           </div>
 
-          <button type="submit" class="button button-block"/>Get Started</button>
+          <a href="#/dashboard" class="button button-block"/>Get Started</a>
 
           </form>
 
         </div>
 </div>
-      </div>
+</div>
+</div>
