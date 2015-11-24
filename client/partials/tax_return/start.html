@@ -56,8 +56,6 @@
 			</div>
 			<div ng-show="kids" class="col-sm-12">
 				<input type="text" class="col-sm-11" ng-model="tax.dependents" ng-change="claimedDependents()" placeholder="how many dependents do you have?">
-<!-- 				<input type="text" class="col-sm-11" ng-model="tax.dependentsOver17" ng-change="claimedDependentsOver17(tax.dependentsOver17)" placeholder="how many are dependents 17-23 and a full-time student?"> -->
-<!-- 				<input type="text" class="col-sm-11" ng-model="tax.dependentsUnder17" ng-change="claimedDependents(tax.dependentsUnder17)" placeholder="how many are dependents age 16 or under?"> -->
 			</div>
 		</div>
 	<div class="income">
@@ -210,7 +208,7 @@
 				</div>
 		</div>
 	<div class="col-sm-12">
-	<a ng-click="testing()" class="btn btn-primary text-right col-sm-12">Submit</a>
+	<a href="#/results" ng-click="submiting()" class="btn btn-primary text-right col-sm-12">Submit</a>
 	</div>
 	</div>
 

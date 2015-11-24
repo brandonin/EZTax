@@ -1,53 +1,68 @@
+<div ng-controller="TaxController">
+	<div class="tax-wrapper">	
+		<div class="taxes" ng-show="taxes.forecastedReturn">
+			<h4 class="current_tax">
+				Forecasted Refund
+			</h4>
+			<h4 class="forecasted_refund">
+				{{ taxes.forecastedReturn }}
+			</h4>
+		</div>
+		<div class="taxes" ng-show="taxes.taxDue">
+			<h4 class="current_tax">
+				Amount Due
+			</h4>
+			<h4 class="taxDue">
+				{{ taxes.taxDue }}
+			</h4>
+		</div>
 		<div class="taxes_summary">
 			<h4>Summary</h4><br>
-			<div class="row default-text">
+			<div class="row default-text" ng-show="taxes.maritalStatus">
 				<h4 class="padding-left col-sm-6">Filing Status</h4>
-				<h4 class="spacing col-sm-6">{{ maritalStatus }}</h4>
+				<h4 class="spacing col-sm-6">{{ taxes.maritalStatus }}</h4>
 			</div>
-			<hr class="full">
-			<div class="row default-text">
+			<hr class="full" ng-show="taxes.maritalStatus">
+			<div class="row default-text" ng-show="taxes.totalIncome">
 				<h4 class="padding-left col-sm-6">Total Income</h4>
-				<h4 class="spacing col-sm-6">${{ incomeTotal }}</h4>
+				<h4 class="spacing col-sm-6">${{ taxes.totalIncome }}</h4>
 			</div>
-			<hr class="full">
-			<div class="row default-text">
+			<hr class="full" ng-show="taxes.totalIncome">
+			<div class="row default-text" ng-show="taxes.federalTaxesWithheld">
 				<h4 class="padding-left col-sm-6">Federal Taxes Withheld</h4>
-				<h4 class="spacing col-sm-6">${{ taxesWithheld }}</h4>
+				<h4 class="spacing col-sm-6">${{ taxes.federalTaxesWithheld }}</h4>
 			</div>
-			<hr class="full">
-	<!-- 		<div class="row default-text">
-				<h4 class="padding-left col-sm-6">Adjusted Income</h4>
-				<h4 class="spacing col-sm-6">$0.00</h4>
-			</div>
-			<hr class="full"> -->
-			<div class="row default-text">
+			<hr class="full" ng-show="taxes.federalTaxesWithheld">
+			<div class="row default-text" ng-show="taxes.dependents">
 				<h4 class="padding-left col-sm-6">Dependents</h4>
-				<h4 class="spacing col-sm-6">{{ numberOfDependents }}</h4>
+				<h4 class="spacing col-sm-6">{{ taxes.dependents }}</h4>
 			</div>
-			<hr class="full">
+			<hr class="full" ng-show="taxes.dependents">
 
-			<div class="row default-text">
+			<div class="row default-text" ng-show="taxes.adjustments">
 				<h4 class="padding-left col-sm-6">Adjustments</h4>
-				<h4 class="spacing col-sm-6">${{ adjustments }}</h4>
+				<h4 class="spacing col-sm-6">${{ taxes.adjustments }}</h4>
 			</div>
-			<hr class="full">
-			<div class="row default-text">
+			<hr class="full" ng-show="taxes.adjustments">
+			<div class="row default-text" ng-show="taxes.deduction">
 				<h4 class="padding-left col-sm-6">Deductions</h4>
-				<h4 class="spacing col-sm-6">${{ deduction }}</h4>
+				<h4 class="spacing col-sm-6">${{ taxes.deduction }}</h4>
 			</div>
-				<hr class="full">
-			<div class="row default-text">
+				<hr class="full" ng-show="taxes.deduction">
+			<div class="row default-text" ng-show="taxes.exemption">
 				<h4 class="padding-left col-sm-6">Exemptions</h4>
-				<h4 class="spacing col-sm-6">${{ exemption }}</h4>
+				<h4 class="spacing col-sm-6">${{ taxes.exemption }}</h4>
 			</div>				
-			<hr class="full">
-			<div class="row default-text">
+			<hr class="full" ng-show="taxes.exemption">
+			<div class="row default-text" ng-show="taxes.education_credit">
 				<h4 class="padding-left col-sm-6">Education Credit</h4>
-				<h4 class="spacing col-sm-6">${{ education_credit }}</h4>
+				<h4 class="spacing col-sm-6">${{ taxes.education_credit }}</h4>
 			</div>
-			<hr class="full">
-			<div class="row default-text" >
+			<hr class="full" ng-show="taxes.education_credit">
+			<div class="row default-text" ng-show="taxes.AOC">
 				<h4 class="padding-left col-sm-6">American Opportunity Credit</h4>
-				<h4 class="spacing col-sm-6">${{ AOC }}</h4>
+				<h4 class="spacing col-sm-6">${{ taxes.AOC }}</h4>
 			</div>
 		</div>
+	</div>
+</div>

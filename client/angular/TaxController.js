@@ -18,10 +18,13 @@ app.controller("TaxController", function($scope, TaxFactory) {
 	// });
 	$scope.forecastedReturn = $scope.incomeTotal;
 
+	TaxFactory.getInfo(function (data) {
+		$scope.taxes = data;
+		console.log($scope.taxes)
+	});
 	$scope.single = function(info) {
 
 		TaxFactory.maritalStatus(info, function (output) {
-			console.log(output)
 			// $scope.tax(output);
 			info = {};
 		});
@@ -60,7 +63,6 @@ app.controller("TaxController", function($scope, TaxFactory) {
 	}
 	$scope.claimedDependents = function () {
 		TaxFactory.claimedDependents($scope.tax, function (output) {
-			console.log(output)
 		$scope.numberOfDependents=output.dependents;
 		if(output.dependents > 0){	
 		$scope.exemption = output.exemptionDependent + $scope.exemption;
@@ -140,7 +142,8 @@ app.controller("TaxController", function($scope, TaxFactory) {
 			$scope.AOC = output.AOC;
 			console.log(output)
 		})
-
-		// console.log($scope.education_credit, $scope.AOC);
+	}
+	$scope.submiting = function () {
+		TaxFactory.submiting();
 	}
 });
