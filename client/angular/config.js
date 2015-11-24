@@ -31,5 +31,8 @@ app.config(function ($routeProvider) {
     })    
     .when('/results',{
       templateUrl:'partials/tax_return/results.html'
+    })    
+    .when('/finished',{
+      templateUrl:'partials/tax_return/finish.html'
     })
 });

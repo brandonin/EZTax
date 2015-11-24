@@ -138,3 +138,17 @@
 	text-align: center;
 	vertical-align: center;
 }
+.finished {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    text-align: center;
+    color: #fff;
+    background-image: url(./../img/giphy.gif);
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    height: 703px;
+}
