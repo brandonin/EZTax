@@ -28,5 +28,8 @@ app.config(function ($routeProvider) {
     })
     .when('/1040',{
       templateUrl:'partials/download/download.html'
+    })    
+    .when('/results',{
+      templateUrl:'partials/tax_return/results.html'
     })
 });
