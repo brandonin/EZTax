@@ -15,10 +15,5 @@ app.factory('UserFactory', function($http) {
 			callback(user);
 		});
 	};
-	factory.removeUser = function(info, callback) {
-		$http.get('/removeUser/' + info, info).success(function (output) {
-			users.splice(users.indexOf(info), 1);
-		});
-	};
 	return factory;
 });
